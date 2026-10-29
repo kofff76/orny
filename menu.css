@@ -1,0 +1,63 @@
+
+    .DORS{position:fixed;inset:0;z-index:40;pointer-events:none}
+    .DORS .DOR{
+      position:absolute;top:0;bottom:0;width:50vw;background:var(--red);
+      box-shadow:none;transition:transform 600ms cubic-bezier(.22,.61,.36,1);
+      display:grid;place-items:center
+    }
+    .DORS .Left{left:0;transform:translateX(-100%);border-right:1px solid #111;background:var(--red);}
+    .DORS .Right{right:0;transform:translateX(100%);border-left:1px solid #111;background:var(--red);}
+    .DORS.closed .Left{transform:translateX(0%)}
+    .DORS.closed .Right{transform:translateX(0%)}
+    /* золотая кромка */
+    .DORS .Left::after,.DORS .Right::before{content:"";position:absolute;top:0;bottom:0;width:4px}
+    .DORS .Left::after{right:-2px;background:linear-gradient(var(--gold-3),var(--gold-2),var(--gold-1))}
+    .DORS .Right::before{left:-2px;background:linear-gradient(var(--gold-3),var(--gold-2),var(--gold-1))}
+    @media (prefers-reduced-motion: reduce){.DORS .DOR{transition:none}}
+
+    /* ====== СОДЕРЖИМОЕ ДВЕРЕЙ ====== */
+    .DOOR-center{width:100%;height:100%;display:grid;place-items:center}
+    /* Левая: логотип */
+    .logo-box{display:grid;place-items:center;gap:12px;text-align:center;padding:4vw}
+    .logo-box img{width:min(40vw,420px);max-width:80%;height:auto;display:block;filter:drop-shadow(0 8px 24px rgba(0,0,0,.6))}
+    .logo-title{margin:0;font:800 clamp(28px,5vw,56px)/1.05 Georgia,serif;
+      background:linear-gradient(180deg,var(--gold-3),var(--gold-2) 55%,var(--gold-1));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+    /* Правая: меню */
+    .menu-box{width:min(560px,80%);max-width:92vw;padding:16px;display:grid;justify-items:center;gap:12px}
+    .main-title{margin:0 0 12px;font:800 clamp(24px,4vw,40px)/1.05 Georgia,serif;
+      background:linear-gradient(180deg,var(--gold-3),var(--gold-2) 55%,var(--gold-1));-webkit-background-clip:text;background-clip:text;color:transparent;text-align:center}
+
+    /* ====== Оверлей ====== */
+    .menu-overlay{position:fixed;inset:0;z-index:30;display:none;pointer-events:none}
+    .menu-overlay.show{display:block}
+
+    /* ====== Меню ====== */
+    .menu-list{display:grid;grid-auto-flow:row;gap:18px;justify-items:center}
+    @keyframes gleam { 0%{ background-position:50% 40% } 50%{ background-position:60% 60% } 100%{ background-position:50% 40% } }
+    .menu-link{position:relative;font-family:Georgia,"Times New Roman",serif;font-weight:800;line-height:1.05;
+      font-size:clamp(36px,7.5vw,84px);margin:0;opacity:0;transform:translateY(8px);
+      background:conic-gradient(from var(--angle),var(--gold-3),var(--gold-2),var(--gold-1),var(--gold-4),var(--gold-3));
+      -webkit-background-clip:text;background-clip:text;color:transparent;animation:spin 8s linear infinite,gleam 6s ease-in-out infinite;
+      filter:drop-shadow(0 1px 0 #5a410a) drop-shadow(0 6px 18px #0008);transition:opacity .5s ease,transform .5s cubic-bezier(.22,.61,.36,1)}
+    .menu-link a{text-decoration:none;color:inherit}
+
+    .gold-text{position:relative;font-family:Georgia,"Times New Roman",serif;font-weight:800;line-height:1.05;
+      font-size:clamp(16px,1.5vw,24px);margin:0;opacity:0;transform:translateY(8px);
+      background:conic-gradient(from var(--angle),var(--gold-3),var(--gold-2),var(--gold-1),var(--gold-4),var(--gold-3));
+      -webkit-background-clip:text;background-clip:text;color:transparent;animation:spin 8s linear infinite,gleam 6s ease-in-out infinite;
+      filter:drop-shadow(0 1px 0 #5a410a) drop-shadow(0 6px 18px #0008);transition:opacity .5s ease,transform .5s cubic-bezier(.22,.61,.36,1)}
+
+    /* Показывать пункты, когда меню открыто */
+    .menu-open .menu-link{opacity:1;transform:none}
+
+    
+/* Palette and responsive sizing only; door transforms/easing above are from header.html. */
+:root{--rail:0px;--gold-1:#ad1925;--gold-2:#fffdfa;--gold-3:#fff;--gold-4:#f4ddd9}
+main{margin-left:0}.hero{width:100%}.hero-content{padding-left:10%}.hero-bottom{left:10%}.page-intro{padding-left:10%}.skip{left:90px}.sidebar,.mobile-head{display:none}
+.burger{position:fixed;top:18px;left:18px;width:58px;height:58px;border:1px solid var(--red);border-radius:50%;background:var(--white);color:var(--red);z-index:95;display:grid;place-items:center;box-shadow:0 2px 15px #7a102020}
+.bars{width:24px;display:grid;gap:5px}.bars i{display:block;height:2px;background:currentColor;transition:transform .3s,opacity .3s}.burger[aria-expanded=true] .bars i:nth-child(1){transform:translateY(7px) rotate(45deg)}.burger[aria-expanded=true] .bars i:nth-child(2){opacity:0}.burger[aria-expanded=true] .bars i:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.DORS{z-index:90;visibility:hidden;transition:visibility 0s .6s}.DORS.closed{visibility:visible;pointer-events:auto;transition-delay:0s}.DORS .DOR{border:0}.DORS .Left{background:var(--white);color:var(--red)}.DORS .Right{background:var(--red);color:var(--white)}.DORS .Left:after,.DORS .Right:before{background:var(--red);width:1px}.logo-title{background:none;color:var(--red);font-family:Mont,sans-serif;font-weight:900;font-size:clamp(30px,5vw,75px);letter-spacing:-.06em}.logo-box p{font-size:10px;letter-spacing:.15em;margin-top:35px}.menu-box{width:92%;padding:35px 15px;max-height:100svh;overflow:auto}.menu-list{gap:clamp(12px,2.7vh,25px);width:100%}.menu-link{background:none;color:white;filter:none;animation:none;font-family:Cormorant,Georgia,serif;font-size:clamp(27px,4.3vw,64px);font-weight:300;letter-spacing:-.035em;transition-delay:calc(var(--i)*35ms)}.menu-link a[aria-current]{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:9px}.menu-link a:hover{opacity:.65}body.menu-open{overflow:hidden}.menu-overlay{pointer-events:none}
+.card-art{background:#f4ece9;display:grid;place-items:center}.card-art span{position:static;font:110px/1 Cormorant,serif;color:var(--red)}.media-art{background:var(--red)}.media-art:after{content:'МЕСТО ДЛЯ МАТЕРИАЛА';position:absolute;inset:0;display:grid;place-items:center;color:white;font-size:10px;letter-spacing:.17em}.news-placeholder{height:155px;background:var(--red);color:white;display:grid;place-content:center;text-align:center;font-size:13px;font-weight:700;line-height:1.5}
+@media(max-width:760px){.hero{height:100svh}.hero-content{padding:95px 7% 100px}.hero-bottom{left:7%}.page-intro{padding:95px 7% 70px}.burger{width:48px;height:48px;top:12px;left:12px}.logo-title{font-size:clamp(20px,5vw,35px)}.logo-box{padding:16px}.logo-box p{font-size:7px;letter-spacing:.06em}.menu-box{padding:70px 8px 30px;width:100%}.menu-link{font-size:clamp(22px,5.4vw,37px)}.menu-list{gap:23px}.news-placeholder{grid-column:2}}
+@media(prefers-reduced-motion:reduce){.DORS,.DORS .DOR,.menu-link{transition:none}}
